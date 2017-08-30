@@ -18,6 +18,6 @@ class Sendy extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return self::class;
+        return \BuddyAd\Sendy\Sendy::class;
     }
 }
