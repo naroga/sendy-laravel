@@ -1,16 +1,16 @@
 {
-    "name": "hocza/sendy",
+    "name": "buddyad/sendy-laravel",
     "description": "Sendy API implementation for Laravel",
     "keywords": ["laravel", "sendy", "email", "newsletter", "API"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Jozsef Hocza",
-            "email": "jozsef@hocza.com"
+            "name": "Lucas Mezencio",
+            "email": "lucas.mezencio@gmail.com"
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": "^7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.3",
@@ -18,8 +18,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Hocza\\Sendy\\": "src/",
-            "Hocza\\Tests\\Sendy\\": "tests/"
+            "BuddyAd\\Sendy\\": "src/",
+            "BuddyAd\\Tests\\Sendy\\": "tests/"
         }
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Hocza\Sendy;
+namespace BuddyAd\Sendy;
 
 /**
  * Class Sendy
  *
- * @package Hocza\Sendy
+ * @package BuddyAd\Sendy
  */
 class Sendy
 {
@@ -27,7 +27,6 @@ class Sendy
         $this->setListId($config['listId']);
         $this->setInstallationUrl($config['installationUrl']);
         $this->setApiKey($config['apiKey']);
-
         $this->checkProperties();
     }
 
@@ -66,7 +65,7 @@ class Sendy
      *
      * @return array
      */
-    public function subscribe(array $values)
+    public function subscribe(array $values): array
     {
         $result = $this->buildAndSend('subscribe', $values);
 
@@ -81,7 +80,7 @@ class Sendy
         /**
          * Handle results
          */
-        switch (strval($result)) {
+        switch ($result) {
             case '1':
                 $notice['message'] = 'Subscribed.';
 
@@ -111,7 +110,7 @@ class Sendy
      *
      * @return array
      */
-    public function update($email, array $values)
+    public function update($email, array $values): array
     {
         $values = array_merge([
             'email' => $email
@@ -127,7 +126,7 @@ class Sendy
      *
      * @return array
      */
-    public function unsubscribe($email)
+    public function unsubscribe($email): array
     {
         $result = $this->buildAndSend('unsubscribe', ['email' => $email]);
 
@@ -142,7 +141,7 @@ class Sendy
         /**
          * Handle results
          */
-        switch (strval($result)) {
+        switch ($result) {
             case '1':
                 $notice['message'] = 'Unsubscribed';
 
@@ -168,7 +167,7 @@ class Sendy
      *
      * @return string
      */
-    public function status($email)
+    public function status($email): string
     {
         $url = 'api/subscribers/subscription-status.php';
 
@@ -180,7 +179,7 @@ class Sendy
      *
      * @return string
      */
-    public function count()
+    public function count(): string
     {
         $url = 'api/subscribers/active-subscriber-count.php';
 
@@ -196,9 +195,10 @@ class Sendy
      * @param bool $send : Set this to true to send the campaign
      *
      * @return string
+     *
      * @throws \Exception
      */
-    public function createCampaign($options, $content, $send = false)
+    public function createCampaign($options, $content, $send = false): string
     {
         $url = '/api/campaigns/create.php';
 
@@ -223,10 +223,8 @@ class Sendy
             throw new \Exception('Campaign Content (HTML) is not set', 1);
         }
 
-        if ($send) {
-            if (empty($options['brand_id'])) {
-                throw new \Exception('Brand ID should be set for Draft campaigns', 1);
-            }
+        if ($send && empty($options['brand_id'])) {
+            throw new \Exception('Brand ID should be set for Draft campaigns', 1);
         }
 
         // list IDs can be single or comma separated values
@@ -235,7 +233,7 @@ class Sendy
         }
 
         // should we send the campaign (1) or save as Draft (0)
-        $options['send_campaign'] = ($send) ? 1 : 0;
+        $options['send_campaign'] = $send ? 1 : 0;
 
         return $this->buildAndSend($url, array_merge($options, $content));
     }
@@ -246,7 +244,7 @@ class Sendy
      *
      * @return string
      */
-    private function buildAndSend($url, array $values)
+    private function buildAndSend($url, array $values): string
     {
         /**
          * Merge the passed in values with the options for return
@@ -284,15 +282,15 @@ class Sendy
      */
     private function checkProperties()
     {
-        if (!isset($this->listId)) {
+        if (null === $this->listId) {
             throw new \Exception('[listId] is not set', 1);
         }
 
-        if (!isset($this->installationUrl)) {
+        if (null === $this->installationUrl) {
             throw new \Exception('[installationUrl] is not set', 1);
         }
 
-        if (!isset($this->apiKey)) {
+        if (null === $this->apiKey) {
             throw new \Exception('[apiKey] is not set', 1);
         }
     }

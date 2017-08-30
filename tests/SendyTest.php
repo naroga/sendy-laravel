@@ -1,11 +1,11 @@
 <?php
 
-namespace Hocza\Tests\Sendy;
+namespace BuddyAd\Tests\Sendy;
 
 use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
 
-use Hocza\Sendy\Sendy;
+use BuddyAd\Sendy\Sendy;
 
 /**
  * Class SendyTest

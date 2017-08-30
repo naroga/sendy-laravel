@@ -2,11 +2,11 @@
 # Sendy Laravel
 A service provider for Sendy API in Laravel 5
 
-<a href="https://codeclimate.com/github/hocza/sendy-laravel"><img src="https://codeclimate.com/github/hocza/sendy-laravel/badges/gpa.svg" /></a> [![Latest Stable Version](https://poser.pugx.org/hocza/sendy/v/stable)](https://packagist.org/packages/hocza/sendy) [![Total Downloads](https://poser.pugx.org/hocza/sendy/downloads)](https://packagist.org/packages/hocza/sendy) [![Latest Unstable Version](https://poser.pugx.org/hocza/sendy/v/unstable)](https://packagist.org/packages/hocza/sendy) [![License](https://poser.pugx.org/hocza/sendy/license)](https://packagist.org/packages/hocza/sendy)
+<a href="https://codeclimate.com/github/buddyad/sendy-laravel"><img src="https://codeclimate.com/github/buddyad/sendy-laravel/badges/gpa.svg" /></a> [![Latest Stable Version](https://poser.pugx.org/buddyad/sendy/v/stable)](https://packagist.org/packages/buddyad/sendy) [![Total Downloads](https://poser.pugx.org/buddyad/sendy/downloads)](https://packagist.org/packages/buddyad/sendy) [![Latest Unstable Version](https://poser.pugx.org/buddyad/sendy/v/unstable)](https://packagist.org/packages/buddyad/sendy) [![License](https://poser.pugx.org/buddyad/sendy/license)](https://packagist.org/packages/buddyad/sendy)
 
 ## Installation
 ```shell
-composer require hocza/sendy:1.*
+composer require buddyad/sendy-laravel:1.*
 ```
 
 or append your composer.json with:
@@ -14,7 +14,7 @@ or append your composer.json with:
 ```json
 {
     "require" : {
-        "hocza/sendy": "1.*"
+        "buddyad/sendy-laravel": "1.*"
     }
 }
 ```
@@ -25,7 +25,7 @@ Service provider:
 ```php
 'providers' => [
     // ...
-    'Hocza\Sendy\SendyServiceProvider',
+    'BuddyAd\Sendy\SendyServiceProvider',
 ]
 ```
 
@@ -34,13 +34,13 @@ For the `Sendy::` facade
 ```php
 'aliases' => [
     // ...
-    'Sendy' => 'Hocza\Sendy\Facades\Sendy',
+    'Sendy' => 'BuddyAd\Sendy\Facades\Sendy',
 ]
 ```
 
 ## Configuration
 ```shell
-php artisan vendor:publish --provider="Hocza\Sendy\SendyServiceProvider"
+php artisan vendor:publish --provider="BuddyAd\Sendy\SendyServiceProvider"
 ```
 
 It will create sendy.php within the config directory.

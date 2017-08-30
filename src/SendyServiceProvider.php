@@ -1,24 +1,16 @@
 <?php
 
-namespace Hocza\Sendy;
+namespace BuddyAd\Sendy;
 
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class SendyServiceProvider
  *
- * @package Hocza\Sendy
+ * @package BuddyAd\Sendy
  */
 class SendyServiceProvider extends ServiceProvider
 {
-
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
     /**
      * Bootstrap the application services.
      *
@@ -35,10 +27,12 @@ class SendyServiceProvider extends ServiceProvider
      * Register the application services.
      *
      * @return void
+     *
+     * @throws \Exception
      */
     public function register()
     {
-        $this->app->singleton('Hocza\Sendy\Sendy', function ($app) {
+        $this->app->singleton(Sendy::class, function ($app) {
             return new Sendy($app['config']['sendy']);
         });
     }
@@ -48,7 +42,7 @@ class SendyServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return ['sendy'];
     }
