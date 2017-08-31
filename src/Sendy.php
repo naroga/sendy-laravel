@@ -269,34 +269,7 @@ class Sendy extends SendyStatus
      */
     private function isError($response): bool
     {
-        $errorMessages = [
-            'Already subscribed.',
-            'API key not passed',
-            'Brand ID not passed',
-            'Email address not passed',
-            'Email does not exist in list',
-            'Email not passed',
-            'From email not passed',
-            'From name not passed',
-            'HTML not passed',
-            'Invalid API key',
-            'Invalid email address.',
-            'Invalid list ID.',
-            'List does not exist',
-            'List ID not passed',
-            'List ID(s) not passed',
-            'List IDs does not belong to a single brand',
-            'No data passed',
-            'One or more list IDs are invalid',
-            'Reply to email not passed',
-            'Some fields are missing.',
-            'Subject not passed',
-            'Subscriber does not exist',
-            'Unable to create and send campaign',
-            'Unable to create campaign',
-        ];
-
-        return !in_array($response, $errorMessages, false);
+        return !isset(self::ST_ERROR[$response]);
     }
 
     /**
