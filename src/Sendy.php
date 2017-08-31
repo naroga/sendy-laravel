@@ -2,12 +2,14 @@
 
 namespace BuddyAd\Sendy;
 
+use BuddyAd\Sendy\Exceptions\SendyException;
+
 /**
  * Class Sendy
  *
  * @package BuddyAd\Sendy
  */
-class Sendy
+class Sendy extends SendyStatus
 {
     protected $config;
     protected $installationUrl;
@@ -166,28 +168,28 @@ class Sendy
         $url = '/api/campaigns/create.php';
 
         if (empty($options['from_name'])) {
-            throw new \Exception('From Name is not set', 1);
+            throw new SendyException('From Name is not set');
         }
 
         if (empty($options['from_email'])) {
-            throw new \Exception('From Email is not set', 1);
+            throw new SendyException('From Email is not set');
         }
 
         if (empty($options['reply_to'])) {
-            throw new \Exception('Reply To address is not set', 1);
+            throw new SendyException('Reply To address is not set');
         }
 
         if (empty($options['subject'])) {
-            throw new \Exception('Subject is not set', 1);
+            throw new SendyException('Subject is not set');
         }
 
         // 'plain_text' field can be included, but optional
         if (empty($content['html_text'])) {
-            throw new \Exception('Campaign Content (HTML) is not set', 1);
+            throw new SendyException('Campaign Content (HTML) is not set');
         }
 
         if ($send && empty($options['brand_id'])) {
-            throw new \Exception('Brand ID should be set for Draft campaigns', 1);
+            throw new SendyException('Brand ID should be set for Draft campaigns');
         }
 
         // list IDs can be single or comma separated values
@@ -248,15 +250,15 @@ class Sendy
     private function checkProperties()
     {
         if (null === $this->listId) {
-            throw new \Exception('[listId] is not set', 1);
+            throw new SendyException('[listId] is not set');
         }
 
         if (null === $this->installationUrl) {
-            throw new \Exception('[installationUrl] is not set', 1);
+            throw new SendyException('[installationUrl] is not set');
         }
 
         if (null === $this->apiKey) {
-            throw new \Exception('[apiKey] is not set', 1);
+            throw new SendyException('[apiKey] is not set');
         }
     }
 
