@@ -70,7 +70,7 @@ class Sendy
         $notice = $this->buildResponse($response);
 
         if ($notice['message'] === '1') {
-            $notice['message'] = 'Subscribed';
+            $notice['message'] = 'Subscribed.';
         }
 
         return $notice;
@@ -90,8 +90,10 @@ class Sendy
         $values = array_merge([
             'email' => $email
         ], $values);
+        $notice = $this->subscribe($values);
+        $notice['status'] = !$notice['status'];
 
-        return $this->subscribe($values);
+        return $notice;
     }
 
     /**
@@ -292,7 +294,7 @@ class Sendy
             'Unable to create campaign',
         ];
 
-        return in_array($response, $errorMessages, false);
+        return !in_array($response, $errorMessages, false);
     }
 
     /**

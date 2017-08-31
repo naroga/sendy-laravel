@@ -30,13 +30,13 @@ class SendyTest extends TestCase
     public function testSimpleSubscribe()
     {
         $subscriber = new Sendy($this->config);
-        $subscriber = $subscriber->subscribe([
+        $response = $subscriber->subscribe([
             'name' => 'Alison',
             'email' => 'alison@gmail.com',
         ]);
 
-        $this->assertEquals(true, $subscriber['status']);
-        $this->assertEquals('Subscribed.', $subscriber['message']);
+        $this->assertEquals(true, $response['status']);
+        $this->assertEquals('Subscribed.', $response['message']);
     }
 
     public function testSubscribeASubscriberThatAlreadyExists()
@@ -47,60 +47,60 @@ class SendyTest extends TestCase
             'email' => 'alison2@gmail.com',
         ]);
 
-        $subscriber = $subscriber->subscribe([
+        $response = $subscriber->subscribe([
             'name' => 'Alison',
             'email' => 'alison2@gmail.com',
         ]);
 
-        $this->assertEquals(true, $subscriber['status']);
-        $this->assertEquals('Already subscribed.', $subscriber['message']);
+        $this->assertEquals(false, $response['status']);
+        $this->assertEquals('Already subscribed.', $response['message']);
     }
 
     public function testSimpleUnsubscribe()
     {
         $subscriber = new Sendy($this->config);
-        $subscriber = $subscriber->unsubscribe('alison2@gmail.com');
+        $response = $subscriber->unsubscribe('alison2@gmail.com');
 
-        $this->assertEquals(true, $subscriber['status']);
-        $this->assertEquals('Unsubscribed', $subscriber['message']);
+        $this->assertEquals(true, $response['status']);
+        $this->assertEquals('Unsubscribed', $response['message']);
     }
 
     public function testUnsubscribeASubscriberThatNotExists()
     {
         $subscriber = new Sendy($this->config);
-        $subscriber = $subscriber->unsubscribe('zzzz@gmail.com');
+        $response = $subscriber->unsubscribe('zzzz@gmail.com');
 
         // The API doesn't provide this type of error
-        $this->assertEquals(true, $subscriber['status']);
-        $this->assertEquals('Unsubscribed', $subscriber['message']);
+        $this->assertEquals(true, $response['status']);
+        $this->assertEquals('Unsubscribed', $response['message']);
     }
 
     public function testCheckStatus()
     {
         $subscriber = new Sendy($this->config);
 
-        $subscriber1 = $subscriber->status('zzzz@gmail.com');
+        $response1 = $subscriber->subscriptionStatus('zzzz@gmail.com');
 
-        $this->assertEquals('Email does not exist in list', $subscriber1);
+        $this->assertEquals('Email does not exist in list', $response1['message']);
 
-        $subscriber2 = $subscriber->status('alison2@gmail.com');
+        $response2 = $subscriber->subscriptionStatus('alison2@gmail.com');
 
-        $this->assertEquals('Unsubscribed', $subscriber2);
+        $this->assertEquals('Unsubscribed', $response2['message']);
 
-        $subscriber3 = $subscriber->status('alison@gmail.com');
+        $response3 = $subscriber->subscriptionStatus('alison@gmail.com');
 
-        $this->assertEquals('Subscribed', $subscriber3);
+        $this->assertEquals('Subscribed', $response3['message']);
     }
 
     public function testUpdate()
     {
         $subscriber = new Sendy($this->config);
-        $subscriber = $subscriber->update('alison@gmail.com', [
+        $response = $subscriber->update('alison@gmail.com', [
             'name' => 'Alison 2',
         ]);
 
         // This method use `subscribe` method to update data
-        $this->assertEquals(true, $subscriber['status']);
-        $this->assertEquals('Already subscribed.', $subscriber['message']);
+        $this->assertEquals(true, $response['status']);
+        $this->assertEquals('Already subscribed.', $response['message']);
     }
 }
