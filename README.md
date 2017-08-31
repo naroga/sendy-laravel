@@ -2,7 +2,7 @@
 # Sendy Laravel
 A service provider for Sendy API in Laravel 5
 
-<a href="https://codeclimate.com/github/buddyad/sendy-laravel"><img src="https://codeclimate.com/github/buddyad/sendy-laravel/badges/gpa.svg" /></a> [![Latest Stable Version](https://poser.pugx.org/buddyad/sendy/v/stable)](https://packagist.org/packages/buddyad/sendy) [![Total Downloads](https://poser.pugx.org/buddyad/sendy/downloads)](https://packagist.org/packages/buddyad/sendy) [![Latest Unstable Version](https://poser.pugx.org/buddyad/sendy/v/unstable)](https://packagist.org/packages/buddyad/sendy) [![License](https://poser.pugx.org/buddyad/sendy/license)](https://packagist.org/packages/buddyad/sendy)
+<a href="https://codeclimate.com/github/buddyad/sendy-laravel"><img src="https://codeclimate.com/github/buddyad/sendy-laravel/badges/gpa.svg" /></a> [![Latest Stable Version](https://poser.pugx.org/buddyad/sendy-laravel/v/stable)](https://packagist.org/packages/buddyad/sendy-laravel) [![Total Downloads](https://poser.pugx.org/buddyad/sendy-laravel/downloads)](https://packagist.org/packages/buddyad/sendy-laravel) [![Latest Unstable Version](https://poser.pugx.org/buddyad/sendy-laravel/v/unstable)](https://packagist.org/packages/buddyad/sendy-laravel) [![License](https://poser.pugx.org/buddyad/sendy-laravel/license)](https://packagist.org/packages/buddyad/sendy-laravel)
 
 ## Installation
 ```shell
