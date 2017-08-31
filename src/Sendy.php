@@ -10,7 +10,6 @@ namespace BuddyAd\Sendy;
 class Sendy
 {
     protected $config;
-
     protected $installationUrl;
     protected $apiKey;
     protected $listId;
@@ -67,35 +66,11 @@ class Sendy
      */
     public function subscribe(array $values): array
     {
-        $result = $this->buildAndSend('subscribe', $values);
+        $response = $this->buildAndSend('subscribe', $values);
+        $notice = $this->buildResponse($response);
 
-        /**
-         * Prepare the array to return
-         */
-        $notice = [
-            'status' => true,
-            'message' => '',
-        ];
-
-        /**
-         * Handle results
-         */
-        switch ($result) {
-            case '1':
-                $notice['message'] = 'Subscribed.';
-
-                break;
-            case 'Already subscribed.':
-                $notice['message'] = $result;
-
-                break;
-            default:
-                $notice = [
-                    'status' => false,
-                    'message' => $result
-                ];
-
-                break;
+        if ($notice['message'] === '1') {
+            $notice['message'] = 'Subscribed';
         }
 
         return $notice;
@@ -128,31 +103,13 @@ class Sendy
      */
     public function unsubscribe($email): array
     {
-        $result = $this->buildAndSend('unsubscribe', ['email' => $email]);
+        $response = $this->buildAndSend('unsubscribe', [
+            'email' => $email,
+        ]);
+        $notice = $this->buildResponse($response);
 
-        /**
-         * Prepare the array to return
-         */
-        $notice = [
-            'status' => true,
-            'message' => '',
-        ];
-
-        /**
-         * Handle results
-         */
-        switch ($result) {
-            case '1':
-                $notice['message'] = 'Unsubscribed';
-
-                break;
-            default:
-                $notice = [
-                    'status' => false,
-                    'message' => $result
-                ];
-
-                break;
+        if ($notice['message'] === '1') {
+            $notice['message'] = 'Unsubscribed';
         }
 
         return $notice;
@@ -163,27 +120,31 @@ class Sendy
      * Success: Subscribed, Unsubscribed, Unconfirmed, Bounced, Soft bounced, Complained
      * Error: No data passed, Email does not exist in list, etc.
      *
-     * @param $email
+     * @param string $email
      *
-     * @return string
+     * @return array
      */
-    public function status($email): string
+    public function subscriptionStatus(string $email): array
     {
         $url = 'api/subscribers/subscription-status.php';
+        $response = $this->buildAndSend($url, [
+            'email' => $email,
+        ]);
 
-        return $this->buildAndSend($url, ['email' => $email]);
+        return $this->buildResponse($response);
     }
 
     /**
      * Gets the total active subscriber count
      *
-     * @return string
+     * @return array
      */
-    public function count(): string
+    public function count(): array
     {
         $url = 'api/subscribers/active-subscriber-count.php';
+        $response = $this->buildAndSend($url, []);
 
-        return $this->buildAndSend($url, []);
+        return $this->buildResponse($response);
     }
 
     /**
@@ -194,11 +155,11 @@ class Sendy
      * @param $content
      * @param bool $send : Set this to true to send the campaign
      *
-     * @return string
+     * @return array
      *
      * @throws \Exception
      */
-    public function createCampaign($options, $content, $send = false): string
+    public function createCampaign($options, $content, $send = false): array
     {
         $url = '/api/campaigns/create.php';
 
@@ -235,7 +196,9 @@ class Sendy
         // should we send the campaign (1) or save as Draft (0)
         $options['send_campaign'] = $send ? 1 : 0;
 
-        return $this->buildAndSend($url, array_merge($options, $content));
+        $response = $this->buildAndSend($url, array_merge($options, $content));
+
+        return $this->buildResponse($response);
     }
 
     /**
@@ -293,5 +256,57 @@ class Sendy
         if (null === $this->apiKey) {
             throw new \Exception('[apiKey] is not set', 1);
         }
+    }
+
+    /**
+     * @param $response
+     *
+     * @return bool
+     */
+    private function isError($response): bool
+    {
+        $errorMessages = [
+            'Already subscribed.',
+            'API key not passed',
+            'Brand ID not passed',
+            'Email address not passed',
+            'Email does not exist in list',
+            'Email not passed',
+            'From email not passed',
+            'From name not passed',
+            'HTML not passed',
+            'Invalid API key',
+            'Invalid email address.',
+            'Invalid list ID.',
+            'List does not exist',
+            'List ID not passed',
+            'List ID(s) not passed',
+            'List IDs does not belong to a single brand',
+            'No data passed',
+            'One or more list IDs are invalid',
+            'Reply to email not passed',
+            'Some fields are missing.',
+            'Subject not passed',
+            'Subscriber does not exist',
+            'Unable to create and send campaign',
+            'Unable to create campaign',
+        ];
+
+        return in_array($response, $errorMessages, false);
+    }
+
+    /**
+     * @param $response
+     *
+     * @return array
+     */
+    private function buildResponse($response): array
+    {
+        $notice = [
+            'status' => $this->isError($response),
+            'message' => $response,
+        ];
+
+        return $notice;
     }
 }
