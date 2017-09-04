@@ -282,8 +282,27 @@ class Sendy extends SendyStatus
         $notice = [
             'status' => $this->isError($response),
             'message' => $response,
+            'code' => $this->buildCode($response),
         ];
 
         return $notice;
+    }
+
+    /**
+     * @param $response
+     *
+     * @return int
+     */
+    private function buildCode($response): int
+    {
+        if (array_key_exists($response, self::ST_ERROR)) {
+            return self::ST_ERROR[$response];
+        }
+
+        if (array_key_exists($response, self::ST_SUCCESS)) {
+            return self::ST_SUCCESS[$response];
+        }
+
+        return 1;
     }
 }
