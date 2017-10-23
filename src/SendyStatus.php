@@ -1,11 +1,11 @@
 <?php
 
-namespace BuddyAd\Sendy;
+namespace Naroga\Sendy;
 
 /**
  * Class SendyStatus
  *
- * @package BuddyAd\Sendy
+ * @package Naroga\Sendy
  */
 abstract class SendyStatus
 {

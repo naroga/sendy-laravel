@@ -2,11 +2,11 @@
 # Sendy Laravel
 A service provider for Sendy API in Laravel 5
 
-<a href="https://codeclimate.com/github/BuddyAd/sendy-laravel"><img src="https://codeclimate.com/github/BuddyAd/sendy-laravel/badges/gpa.svg" /></a> [![Latest Stable Version](https://poser.pugx.org/buddyad/sendy-laravel/v/stable)](https://packagist.org/packages/buddyad/sendy-laravel) [![Total Downloads](https://poser.pugx.org/buddyad/sendy-laravel/downloads)](https://packagist.org/packages/buddyad/sendy-laravel) [![Latest Unstable Version](https://poser.pugx.org/buddyad/sendy-laravel/v/unstable)](https://packagist.org/packages/buddyad/sendy-laravel) [![License](https://poser.pugx.org/buddyad/sendy-laravel/license)](https://packagist.org/packages/buddyad/sendy-laravel)
+<a href="https://codeclimate.com/github/Naroga/sendy-laravel"><img src="https://codeclimate.com/github/Naroga/sendy-laravel/badges/gpa.svg" /></a> [![Latest Stable Version](https://poser.pugx.org/naroga/sendy-laravel/v/stable)](https://packagist.org/packages/naroga/sendy-laravel) [![Total Downloads](https://poser.pugx.org/naroga/sendy-laravel/downloads)](https://packagist.org/packages/naroga/sendy-laravel) [![Latest Unstable Version](https://poser.pugx.org/naroga/sendy-laravel/v/unstable)](https://packagist.org/packages/naroga/sendy-laravel) [![License](https://poser.pugx.org/naroga/sendy-laravel/license)](https://packagist.org/packages/naroga/sendy-laravel)
 
 ## Installation
 ```shell
-composer require buddyad/sendy-laravel:1.*
+composer require naroga/sendy-laravel:1.*
 ```
 
 or append your composer.json with:
@@ -14,7 +14,7 @@ or append your composer.json with:
 ```json
 {
     "require" : {
-        "buddyad/sendy-laravel": "1.*"
+        "naroga/sendy-laravel": "1.*"
     }
 }
 ```
@@ -25,7 +25,7 @@ Service provider:
 ```php
 'providers' => [
     // ...
-    'BuddyAd\Sendy\SendyServiceProvider',
+    'Naroga\Sendy\SendyServiceProvider',
 ]
 ```
 
@@ -34,13 +34,13 @@ For the `Sendy::` facade
 ```php
 'aliases' => [
     // ...
-    'Sendy' => 'BuddyAd\Sendy\Facades\Sendy',
+    'Sendy' => 'Naroga\Sendy\Facades\Sendy',
 ]
 ```
 
 ## Configuration
 ```shell
-php artisan vendor:publish --provider="BuddyAd\Sendy\SendyServiceProvider"
+php artisan vendor:publish --provider="Naroga\Sendy\SendyServiceProvider"
 ```
 
 It will create sendy.php within the config directory.

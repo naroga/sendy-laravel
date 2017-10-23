@@ -1,13 +1,13 @@
 <?php
 
-namespace BuddyAd\Sendy;
+namespace Naroga\Sendy;
 
-use BuddyAd\Sendy\Exceptions\SendyException;
+use Naroga\Sendy\Exceptions\SendyException;
 
 /**
  * Class Sendy
  *
- * @package BuddyAd\Sendy
+ * @package Naroga\Sendy
  */
 class Sendy extends SendyStatus
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace BuddyAd\Sendy;
+namespace Naroga\Sendy;
 
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class SendyServiceProvider
  *
- * @package BuddyAd\Sendy
+ * @package Naroga\Sendy
  */
 class SendyServiceProvider extends ServiceProvider
 {

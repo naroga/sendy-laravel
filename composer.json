@@ -1,5 +1,5 @@
 {
-    "name": "buddyad/sendy-laravel",
+    "name": "naroga/sendy-laravel",
     "description": "Sendy API implementation for Laravel",
     "keywords": ["laravel", "sendy", "email", "newsletter", "API"],
     "license": "MIT",
@@ -18,8 +18,8 @@
     },
     "autoload": {
         "psr-4": {
-            "BuddyAd\\Sendy\\": "src/",
-            "BuddyAd\\Tests\\Sendy\\": "tests/"
+            "Naroga\\Sendy\\": "src/",
+            "Naroga\\Tests\\Sendy\\": "tests/"
         }
     }
 }

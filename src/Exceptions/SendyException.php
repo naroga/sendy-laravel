@@ -1,11 +1,11 @@
 <?php
 
-namespace BuddyAd\Sendy\Exceptions;
+namespace Naroga\Sendy\Exceptions;
 
 /**
  * Class SendyException
  *
- * @package BuddyAd\Sendy\Exceptions
+ * @package Naroga\Sendy\Exceptions
  */
 class SendyException extends \Exception
 {

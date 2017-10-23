@@ -1,13 +1,13 @@
 <?php
 
-namespace BuddyAd\Sendy\Facades;
+namespace Naroga\Sendy\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
  * Class Sendy
  *
- * @package BuddyAd\Sendy\Facades
+ * @package Naroga\Sendy\Facades
  */
 class Sendy extends Facade
 {
@@ -18,6 +18,6 @@ class Sendy extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return \BuddyAd\Sendy\Sendy::class;
+        return \Naroga\Sendy\Sendy::class;
     }
 }
